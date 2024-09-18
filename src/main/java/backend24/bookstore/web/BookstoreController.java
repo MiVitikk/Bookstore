@@ -2,6 +2,7 @@ package backend24.bookstore.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,17 +15,20 @@ import org.springframework.ui.Model;
 
 import backend24.bookstore.domain.Book;
 import backend24.bookstore.domain.BookRepository;
+import backend24.bookstore.domain.CategoryRepository;
+import backend24.bookstore.domain.Category;
 
 @Controller
 public class BookstoreController {
-    
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private CategoryRepository catrepository;
 
     private static final Logger log = LoggerFactory.getLogger(BookstoreController.class);
 
-    private final BookRepository bookRepository;
-    public BookstoreController(BookRepository bookRepository){
-        this.bookRepository = bookRepository;
-    }
+    
     @RequestMapping("/index")
     @ResponseBody
     public String index(){
@@ -41,6 +45,7 @@ public class BookstoreController {
     public String addBook(Model model){
         log.info("Lisätään uusi kirja");
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", catrepository.findAll());
         return "newBook";
     }
 
@@ -60,6 +65,7 @@ public class BookstoreController {
     @GetMapping("editBook/{id}")
     public String editBook(@PathVariable("id") Long id, Model model){
         model.addAttribute("editBook", bookRepository.findById(id));
+        model.addAttribute("categories", catrepository.findAll());
         return "editBook";
     }
 }

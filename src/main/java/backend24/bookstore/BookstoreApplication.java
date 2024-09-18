@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import backend24.bookstore.domain.Book;
 import backend24.bookstore.domain.BookRepository;
+import backend24.bookstore.domain.Category;
+import backend24.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -18,14 +20,23 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookData(BookRepository bookRepository){
+	public CommandLineRunner bookData(BookRepository bookRepository, CategoryRepository catrepository){
 		return (args) ->{
 
 			log.info("save some books");
-			bookRepository.save(new Book("Kirja1" , "Kirjailija1", "aaa", 2010, 10));
-			bookRepository.save(new Book("Kirja2", "Kirjailija2", "bbb", 2011, 12));
-			bookRepository.save(new Book("Kirja3", "Kirjalija3", "ccc", 1990, 20));
-			bookRepository.save(new Book("Kirja4", "Kirjailija4", "ddd", 1999, 25));
+
+			Category category1 = new Category("Horror");
+			Category category2 = new Category("Fantasy");
+			Category category3 = new Category("Drama");
+
+			catrepository.save(category1);
+			catrepository.save(category2);
+			catrepository.save(category3);
+
+
+			bookRepository.save(new Book("Kirja1", "Kirjailija1", "12341234", 2020, 10.0, category3));
+			bookRepository.save(new Book("Kirja2", "Kirajilija2", "12319238", 1990, 15.0, category1));
+			bookRepository.save(new Book("Kirja3", "Kirjailija3", "000101010", 1991, 2.0, category2));
 
 			log.info("Tulostetaan kirjat");
 			for (Book book : bookRepository.findAll()){
