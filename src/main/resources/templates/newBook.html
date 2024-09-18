@@ -12,10 +12,12 @@
 		<form action="#" th:object="${book}" th:action="@{saveBook}" method="post">
 			<div>
 				<label>Title</label> <input type="text" th:field="*{title}" />
+				<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" >Error</td>
 			</div>
 
 			<div>
 				<label>Author</label> <input type="text" th:field="*{author}" />
+				<td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Error</td>
 			</div>
 
 			<div>
@@ -28,6 +30,7 @@
 
 			<div>
 				<label>Price</label> <input type="text" th:field="*{price}" />
+				<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></td>
 			</div>
 			
 			<div style="clear: both; display: block; height: 10px;"></div>

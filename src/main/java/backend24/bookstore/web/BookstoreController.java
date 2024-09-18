@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
+import jakarta.validation.Valid;
 
 import backend24.bookstore.domain.Book;
 import backend24.bookstore.domain.BookRepository;
@@ -50,7 +53,10 @@ public class BookstoreController {
     }
 
     @PostMapping("/saveBook")
-    public String saveBook(@ModelAttribute("book") Book book){
+    public String saveBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "newBook";
+        }
         bookRepository.save(book);
         return "redirect:/booklist";
     }
