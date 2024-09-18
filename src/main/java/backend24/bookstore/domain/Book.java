@@ -32,6 +32,16 @@ public class Book {
    
 
    
+    public Book(Long id, @NotNull @Size(min = 2, max = 50) String title,
+            @NotNull @Size(min = 2, max = 50) String author, String isbn, int publicationYear, double price) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publicationYear = publicationYear;
+        this.price = price;
+    }
+
     public Book(String title, String author, String isbn, int publicationYear, double price, Category category) {
         super();
         

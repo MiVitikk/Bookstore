@@ -2,10 +2,14 @@ package backend24.bookstore.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Category {
+
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,11 +22,12 @@ public class Category {
     
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="category")
+    @JsonIgnore
     private List<Book> books;
 
     
     public Category() {
-
+        super();
     }
 
     
@@ -31,6 +36,14 @@ public class Category {
         super();
         this.name = name;
     }
+
+    public Category(Long categoryid, String name, List<Book> books) {
+        this.categoryid = categoryid;
+        this.name = name;
+        this.books = books;
+    }
+
+    
 
     public Category(Long categoryid) {
         this.categoryid = categoryid;

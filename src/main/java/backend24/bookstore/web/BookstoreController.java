@@ -53,7 +53,7 @@ public class BookstoreController {
     }
 
     @PostMapping("/saveBook")
-    public String saveBook(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult){
+    public String saveBook(@Valid @ModelAttribute("book")  Book book, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
             return "newBook";
         }
