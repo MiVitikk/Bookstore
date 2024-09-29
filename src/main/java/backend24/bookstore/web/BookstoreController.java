@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 
 import jakarta.validation.Valid;
 
@@ -32,6 +34,11 @@ public class BookstoreController {
     private static final Logger log = LoggerFactory.getLogger(BookstoreController.class);
 
     
+    @RequestMapping(value="/login")
+    public String login(){
+        return "login";
+    }
+
     @RequestMapping("/index")
     @ResponseBody
     public String index(){
@@ -61,6 +68,7 @@ public class BookstoreController {
         return "redirect:/booklist";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("delete/{id}")
     public String deleteBook(@PathVariable("id") Long id){
         log.info("delete book " + id);
