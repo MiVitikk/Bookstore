@@ -9,6 +9,6 @@ RUN ./mvnw clean install -DskipTests
 RUN find ./target -type f -name 'bookstore.jar' -exec cp {} /opt/app/app.jar \; -quit
 
 FROM eclipse-temurin:17-jre-alpine
-COPY --from=builder /target/bookstore-0.0.1-SNAPSHOT.jar /target/bookstore.jar
+COPY --from=builder /opt/app/bookstore-0.0.1-SNAPSHOT.jar /opt/app/bookstore.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "bookstore.jar" ]
+ENTRYPOINT ["java", "-jar", "/opt/app/bookstore.jar" ]
