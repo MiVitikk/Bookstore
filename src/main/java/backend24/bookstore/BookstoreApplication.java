@@ -41,9 +41,9 @@ public class BookstoreApplication {
 			catrepository.save(category3);
 
 
-			bookRepository.save(new Book("Kirja1", "Kirjailija1", "12341234", 2020, 10.0, category3));
-			bookRepository.save(new Book("Kirja2", "Kirajilija2", "12319238", 1990, 15.0, category1));
-			bookRepository.save(new Book("Kirja3", "Kirjailija3", "000101010", 1991, 2.0, category2));
+			bookRepository.save(new Book("The Shining", "Stephen King", "12341234", 1977, 10.0, category1));
+			bookRepository.save(new Book("The Hobbit", "J.R.R Tolkien", "12319238", 1950, 15.0, category2));
+			bookRepository.save(new Book("Pride and Prejudice", "Jane Austen", "000101010", 1991, 2.0, category3));
 
 			log.info("Tulostetaan kirjat");
 			for (Book book : bookRepository.findAll()){
