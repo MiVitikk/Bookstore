@@ -1,10 +1,12 @@
 package backend24.bookstore.domain;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotBlank;;
 
 @Entity
+@Table(name="book")
 public class Book {
 
     @Id
@@ -22,6 +25,8 @@ public class Book {
     @Size(min=2, max=50)
     private String title, author;
     private String isbn;
+
+    @Column(name="publicationyear")
     private int publicationYear;
     
     private double price;

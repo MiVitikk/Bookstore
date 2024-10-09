@@ -7,17 +7,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="category")
 public class Category {
 
     
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="id")
     private Long categoryid;
     
 
     
-
+    @Column(name ="categoryname")
     private String name;
     
     
